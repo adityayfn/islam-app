@@ -14,7 +14,7 @@
       <div class="overflow-x-auto font-bold">
         <table class="table table-xs md:table-lg">
           <thead>
-            <tr class="text-third text-md md:text-2xl">
+            <tr class="text-third text-md md:text-2xl dark:text-fourth">
               <th>No</th>
               <th>Nama</th>
               <th>Asma</th>
