@@ -22,13 +22,8 @@
     </div>
   </div>
 </template>
-<script>
+<script setup>
 import Darkmode from "./Darkmode.vue"
-export default {
-  components: {
-    Darkmode,
-  },
-}
 </script>
 <style>
 .jumbotron {

@@ -10,7 +10,7 @@ const getSurahs = () => {
 
   const load = async () => {
     try {
-      await fetch("https://quranapi.idn.sch.id/surah")
+      await fetch("https://api.quran.gading.dev/surah")
         .then((res) => res.json())
         .then((datas) => {
           let i = datas.data
@@ -21,19 +21,22 @@ const getSurahs = () => {
     }
   }
 
+  const surahName = ref("")
+
   const loadSurah = async () => {
     try {
-      await fetch(`https://quranapi.idn.sch.id/surah/${id}`)
+      await fetch(`https://api.quran.gading.dev/surah/${id}`)
         .then((res) => res.json())
         .then((datas) => {
-          surah.value = datas
+          surah.value = datas.data
+          surahName.value = surah.value.name.transliteration
         })
     } catch (err) {
       error.value = err.message
     }
   }
 
-  return { surahs, error, load, loadSurah, surah }
+  return { surahs, error, load, loadSurah, surah, surahName }
 }
 
 export default getSurahs
