@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@jamescoyle/vue-icon':
+    specifier: ^0.1.2
+    version: 0.1.2
   '@mdi/js':
     specifier: ^7.3.67
     version: 7.3.67
@@ -265,6 +268,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@jamescoyle/vue-icon@0.1.2:
+    resolution: {integrity: sha512-KFrImXx5TKIi6iQXlnyLEBl4rNosNKbTeRnr70ucTdUaciVmd9qK9d/pZAaKt1Ob/8xNnX2GMp8LisyHdKtEgw==}
+    dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
