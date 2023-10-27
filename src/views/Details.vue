@@ -1,71 +1,66 @@
 <template>
-  <div class="bg-white dark:bg-black text-third dark:text-fourth md:mx-10">
+  <div v-if="loading">
+    <Loading />
+  </div>
+  <div
+    class="bg-white dark:bg-neutral text-base-500 dark:text-white md:mx-10"
+    v-else
+  >
     <div class="py-4">
-      <h1 class="text-3xl text-center py-2 font-bold">
-        {{ surahName.id }}
-      </h1>
-      <hr class="w-48 my-0 mx-auto border border-b-2 border-third" />
+      <div class="flex justify-center items-center gap-2">
+        <h1 class="text-3xl text-center py-2 font-bold">
+          {{ data.data.name.transliteration.id }}
+        </h1>
+
+        <Modal
+          :path="mdiInformationSlabCircle"
+          href="#my_modal_1"
+          id="my_modal_1"
+          title-modal="Detail Surah"
+          :content="data.data.tafsir.id"
+        />
+      </div>
+      <hr class="w-48 my-0 mx-auto border border-b-2 border-secondary" />
     </div>
 
-    <div
-      v-for="(ayahs, index) in surah.verses"
-      :key="index"
-      class="gap-6 px-3 py-6"
-    >
-      <div class="number flex gap-2 items-center">
-        <h1 class="text-2xl font-bold">{{ ayahs.number.inSurah }}</h1>
-
-        <audio ref="audioRef" :id="index" :src="ayahs.audio.primary"></audio>
-        <button @click="audioToggle(index)">
-          <font-awesome-icon
-            :icon="
-              currentAudio === index && isPlaying
-                ? ['fas', 'circle-pause']
-                : ['fas', 'circle-play']
-            "
-            class="text-xl mt-1"
-          />
-        </button>
-        <small class="">Double Tap to Playing Audio</small>
-      </div>
-      <div class="arab flex flex-col gap-5 pt-10">
-        <h1 class="text-right text-4xl tracking-wide">{{ ayahs.text.arab }}</h1>
-        <h1 class="text-xl">{{ ayahs.text.transliteration.en }}</h1>
-      </div>
-      <div class="py-5">
-        <h1 class="text-xl">{{ ayahs.indoText }}</h1>
-      </div>
-    </div>
+    <Content
+      v-for="(ayahs, index) in data?.data?.verses"
+      :index="index"
+      :ayahs="ayahs"
+    />
   </div>
 </template>
 <script setup>
-import getSurahs from "../composable/getSurahs"
+import Loading from "../components/Loading.vue"
+import { useQuery } from "@tanstack/vue-query"
+import Content from "../components/Details/Content.vue"
+import { useRoute } from "vue-router"
+import Modal from "../components/Modal.vue"
+import { mdiInformationSlabCircle } from "@mdi/js"
+import { ref, onMounted } from "vue"
 
-import { ref } from "vue"
-const { error, loadSurah, surah, surahName } = getSurahs()
-loadSurah()
+const loading = ref(true)
+const route = useRoute()
 
-const audioRef = ref(null)
+const { data } = useQuery({
+  queryKey: ["detailSurah"],
+  queryFn: async () =>
+    await fetch(`https://api.quran.gading.dev/surah/${route.params.id}`).then(
+      (res) => {
+        return res.json()
+      }
+    ),
+})
 
-const isPlaying = ref(false)
-const currentAudio = ref()
-
-const audioToggle = (index) => {
-  const audio = audioRef.value[index]
-  isPlaying.value = !isPlaying.value
-
-  if (currentAudio.value == index && isPlaying.value) {
-    audio.play()
-    isPlaying.value = true
-    setTimeout(() => {
-      isPlaying.value = false
-    }, audio.duration * 1000)
-  } else {
-    currentAudio.value = index
-    audio.pause()
-    isPlaying.value = false
-  }
-}
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }, 2000)
+})
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap");

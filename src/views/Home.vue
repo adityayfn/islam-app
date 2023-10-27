@@ -1,42 +1,35 @@
 <template>
-  <section class="text-third bg-white dark:bg-black dark:text-fourth md:mx-20">
-    <div class="py-10 px-10">
-      <div class="w-36 md:w-48">
+  <section
+    class="text-base-500 bg-white dark:bg-neutral dark:text-white min-h-screen"
+  >
+    <div
+      class="h-72 md:h-80 w-full bg-gradient-to-t from-secondary to-green-500 flex flex-col justify-center items-center gap-5"
+    >
+      <img src="/public/alquran.svg" alt="alquran" class="md:w-32" />
+      <div>
         <input
           type="search"
           placeholder="Cari Surah"
-          class="input input-bordered input-warning w-full max-w-xs text-black dark:bg-third placeholder:dark:text-black dark:text-white"
+          class="input w-64 md:w-96 max-w-xs text-black dark:bg-neutral placeholder:dark:text-white dark:text-white bg-white focus:border-none"
           v-model="search"
         />
       </div>
+    </div>
 
-      <h1 class="text-center text-3xl font-bold py-5">Daftar Surah</h1>
-      <div class="overflow-x-auto font-bold">
-        <table class="table table-xs md:table-lg">
-          <thead>
-            <tr class="text-third text-md md:text-2xl dark:text-fourth">
-              <th>No</th>
-              <th>Nama</th>
-              <th>Asma</th>
-              <th>Ayat</th>
-            </tr>
-          </thead>
-          <tbody v-for="surah in filteredSurahs">
-            <tr
-              class="hover:bg-third hover:text-white transform motion-safe:hover:-translate-y-1 motion-safe:hover:scale-100 transition ease-in-out duration-300 cursor-pointer"
-              @click="detailSurah(surah.number)"
-            >
-              <td>{{ surah.number }}</td>
-              <td>
-                {{ surah.name.transliteration.id }} <br />({{
-                  surah.name.translation.id
-                }})
-              </td>
-              <td class="arab text-lg">{{ surah.name.short }}</td>
-              <td>{{ surah.numberOfVerses }}</td>
-            </tr>
-          </tbody>
-        </table>
+    <h1 class="text-center text-3xl font-bold py-5">Daftar Surah</h1>
+    <div class="container-content">
+      <div
+        v-if="isLoading"
+        class="flex gap-4 flex-wrap overflow-x-hidden justify-center"
+      >
+        <CardSkeleton v-for="skeleton in 114" />
+      </div>
+      <div v-else class="flex gap-4 flex-wrap overflow-x-hidden justify-center">
+        <Card
+          v-for="(surah, index) in filteredSurahs"
+          :surah="surah"
+          :index="index"
+        />
       </div>
     </div>
   </section>
@@ -44,22 +37,27 @@
 
 <script setup>
 import { computed, ref } from "vue"
-import getSurahs from "../composable/getSurahs"
-import { useRouter } from "vue-router"
-const { surahs, load, error } = getSurahs()
-load()
+import CardSkeleton from "../components/Card/CardSkeleton.vue"
+
+import Card from "../components/Card/Card.vue"
+
+import { useQuery } from "@tanstack/vue-query"
+
+const { data, isLoading } = useQuery({
+  queryKey: ["surahs"],
+  queryFn: async () =>
+    await fetch("https://api.quran.gading.dev/surah").then((res) => {
+      return res.json()
+    }),
+})
+
 const search = ref("")
 
-const router = useRouter()
-
 const filteredSurahs = computed(() => {
-  return surahs.value.filter((surah) =>
+  return data?.value?.data.filter((surah) =>
     surah.name.transliteration.id.toLowerCase().includes(search.value)
   )
 })
-const detailSurah = (id) => {
-  return router.push(`/details/${id}`)
-}
 </script>
 
 <style scoped>

@@ -1,17 +1,19 @@
 <template>
   <div
-    class="hover:bg-fourth rounded-sm mx-1 my-2 px-2 py-1 hover:text-black cursor-pointer"
+    class="rounded-sm mx-1 my-2 px-2 py-1 hover:text-black cursor-pointer text-secondary dark:hover:text-white"
     @click="darkMode()"
   >
-    <font-awesome-icon
-      :icon="darkOn ? ['fas', 'sun'] : ['fas', 'moon']"
-      size="lg"
+    <SvgIcon
+      :path="darkOn ? mdiWeatherSunny : mdiMoonWaningCrescent"
+      :size="25"
     />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue"
+import SvgIcon from "./SvgIcon.vue"
+import { mdiMoonWaningCrescent, mdiWeatherSunny } from "@mdi/js"
 const darkOn = ref(false)
 const darkMode = () => {
   darkOn.value = !darkOn.value
@@ -34,7 +36,6 @@ onMounted(() => {
     document.documentElement.classList.remove("dark")
   }
 })
-
 </script>
 
 <style lang="scss" scoped></style>
