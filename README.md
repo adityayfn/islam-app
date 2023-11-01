@@ -1,8 +1,33 @@
-# Vue 3 + Vite
+# Islam App
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is my first project during learn vue js. In this project I use API from :
 
-## Recommended IDE Setup
+#### alquran : `https://api.quran.gading.dev/surah`
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-# alquran-online-v2
+#### hadits : `https://hadis-api-id.vercel.app/hadith/`
+
+#### doa : doa-harian.json -> /src/utils/
+
+# Instalation
+
+```bash
+# clone
+git clone https://github.com/adityayfn/islam-app
+```
+
+Make sure to install the dependencies:
+
+```bash
+# npm
+npm install
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+```
+
+## Tech Stack
+
+**Client:** Vue, Tailwind CSS, Daisy UI
