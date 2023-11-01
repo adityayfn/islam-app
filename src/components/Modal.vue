@@ -1,7 +1,8 @@
 <template>
-  <!-- The button to open modal -->
-  <a :href="props.href"><SvgIcon :path="props.path" /></a>
-  <!-- Put this part before </body> tag -->
+  <a :href="props.href" class="tooltip" data-tip="Detail Surah"
+    ><SvgIcon :path="props.path"
+  /></a>
+
   <div class="modal" :id="props.id">
     <div class="modal-box dark:bg-neutral">
       <h3 class="font-bold text-lg dark:text-base-200">
