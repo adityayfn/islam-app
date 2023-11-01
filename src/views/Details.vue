@@ -9,7 +9,7 @@
     <div class="py-4">
       <div class="flex justify-center items-center gap-2">
         <h1 class="text-3xl text-center py-2 font-bold">
-          {{ data.data.name.transliteration.id }}
+          {{ data?.data.name.transliteration.id }}
         </h1>
 
         <Modal
