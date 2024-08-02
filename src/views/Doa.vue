@@ -1,10 +1,14 @@
 <template>
   <section>
     <div
-      class="w-full md:w-[750px] xl:w-[1100px] h-72 md:h-80 bg-gradient-to-t from-secondary to-green-500 text-white rounded-xl my-2 mx-auto"
+      class="h-72 md:h-80 w-full bg-gradient-to-t from-secondary to-green-500 flex flex-col justify-center items-center gap-5 mx-auto"
     >
       <div class="flex flex-col justify-center items-center gap-5 h-72">
-        <SvgIcon :path="mdiStarCrescent" :size="80" />
+        <SvgIcon
+          :path="mdiStarCrescent"
+          :size="80"
+          class="text-white dark:text-black"
+        />
         <input
           type="search"
           placeholder="Cari Doa"

@@ -1,10 +1,14 @@
 <template>
   <section>
     <div
-      class="w-full md:w-[750px] xl:w-[1100px] h-72 md:h-80 bg-gradient-to-t from-secondary to-green-500 text-white rounded-xl my-4 mx-auto"
+      class="h-72 md:h-80 w-full bg-gradient-to-t from-secondary to-green-500 flex flex-col justify-center items-center gap-5 mx-auto"
     >
       <div class="flex flex-col justify-center items-center gap-5 h-auto pt-2">
-        <SvgIcon :path="mdiBookOpenPageVariant" :size="80" />
+        <SvgIcon
+          :path="mdiBookOpenPageVariant"
+          :size="80"
+          class="text-white dark:text-black"
+        />
         <input
           type="search"
           placeholder="Cari Nomor Hadits"
@@ -29,7 +33,7 @@
       </div>
     </div>
 
-    <div v-if="loading" class="flex flex-col gap-5">
+    <div v-if="loading" class="flex flex-col gap-5 mt-6">
       <ContentSkeleton v-for="cs in 20" />
     </div>
 
@@ -42,7 +46,7 @@
       </div>
     </div>
 
-    <div v-else class="mx-4">
+    <div v-else class="mx-4 mt-6">
       <h1 class="text-center dark:text-base-200">
         Terdapat <span class="font-bold"> {{ data?.total }}</span> hadits
         menurut <span class="font-bold"> {{ data?.name }}</span>

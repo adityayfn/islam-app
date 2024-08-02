@@ -1,12 +1,12 @@
 <template>
   <div class="group mb-2" @click="detailSurah(props.surah.number)">
     <div
-      class="card w-[22.5rem] md:w-64 xl:h-56 border-2 dark:border-white group-hover:border-secondary cursor-pointer"
+      class="card w-[22.5rem] md:w-64 xl:h-56 border-2 dark:border-slate-600 group-hover:border-secondary cursor-pointer"
     >
       <div class="card-body flex flex-row justify-between items-center">
         <div class="w-36 h-28 md:w-24 flex flex-col gap-2">
           <h1
-            class="border-2 dark:border-white rounded-full w-12 h-11 text-center py-2 group-hover:bg-secondary group-hover:text-white group-hover:border-none"
+            class="border-2 dark:border-slate-600 rounded-full w-12 h-11 text-center py-2 group-hover:bg-secondary group-hover:text-white group-hover:border-none"
           >
             {{ props.surah.number }}
           </h1>
@@ -35,6 +35,7 @@ const router = useRouter()
 
 const detailSurah = (id) => {
   router.push(`/alquran/${id}`)
+  console.log(id)
 }
 </script>
 

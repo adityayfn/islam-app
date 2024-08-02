@@ -1,5 +1,5 @@
 <template>
-  <nav class="p-3 flex dark:bg-neutral border-b-2">
+  <nav class="p-3 flex dark:bg-neutral">
     <div class="flex w-full justify-between items-center xl:hidden">
       <NavbarDrawer />
       <AppTitle />

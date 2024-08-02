@@ -37,12 +37,12 @@ import Content from "../components/Details/Content.vue"
 import { useRoute } from "vue-router"
 import Modal from "../components/Modal.vue"
 import { mdiInformationSlabCircle } from "@mdi/js"
-import { ref, onMounted } from "vue"
+import { ref, onMounted, watch } from "vue"
 
 const loading = ref(true)
 const route = useRoute()
 
-const { data } = useQuery({
+const { data, refetch } = useQuery({
   queryKey: ["detailSurah"],
   queryFn: async () =>
     await fetch(`https://api.quran.gading.dev/surah/${route.params.id}`).then(
@@ -53,13 +53,14 @@ const { data } = useQuery({
 })
 
 onMounted(() => {
+  refetch()
   setTimeout(() => {
     loading.value = false
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-  }, 2000)
+  }, 1000)
 })
 </script>
 <style>

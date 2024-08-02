@@ -5,7 +5,16 @@
     <div
       class="h-72 md:h-80 w-full bg-gradient-to-t from-secondary to-green-500 flex flex-col justify-center items-center gap-5"
     >
-      <img src="/public/alquran.svg" alt="alquran" class="md:w-32" />
+      <img
+        src="/public/alquran.svg"
+        alt="alquran"
+        class="md:w-32 dark:hidden"
+      />
+      <img
+        src="/public/alquran2.svg"
+        alt="alquran"
+        class="md:w-32 hidden dark:inline"
+      />
       <div>
         <input
           type="search"
