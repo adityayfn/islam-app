@@ -9,8 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@jamescoyle/vue-icon": "^0.1.2",
-    "@mdi/js": "^7.3.67",
     "@tanstack/vue-query": "^5.0.5",
     "npm-check-updates": "^17.0.3",
     "oh-vue-icons": "^1.0.0-rc3",
