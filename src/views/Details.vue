@@ -30,16 +30,16 @@
     />
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import Loading from "../components/Loading.vue"
 import { useQuery } from "@tanstack/vue-query"
 import Content from "../components/Details/Content.vue"
 import { useRoute } from "vue-router"
 import Modal from "../components/Modal.vue"
 import { mdiInformationSlabCircle } from "@mdi/js"
-import { ref, onMounted, watch } from "vue"
+import { ref, onMounted } from "vue"
 
-const loading = ref(true)
+const loading = ref<boolean>(true)
 const route = useRoute()
 
 const { data, refetch } = useQuery({

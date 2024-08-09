@@ -1,7 +1,7 @@
 <template>
-  <a :href="props.href" class="tooltip" data-tip="Detail Surah"
-    ><SvgIcon :path="props.path"
-  /></a>
+  <a :href="props.href" class="tooltip" data-tip="Detail Surah">
+    <v-icon name="bi-info-circle-fill" scale="1.2"></v-icon>
+  </a>
 
   <div class="modal" :id="props.id">
     <div class="modal-box dark:bg-neutral">
@@ -16,9 +16,8 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps } from "vue"
-import SvgIcon from "./SvgIcon.vue"
 
 const props = defineProps(["path", "titleModal", "content", "href", "id"])
 </script>

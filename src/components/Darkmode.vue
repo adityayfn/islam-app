@@ -3,18 +3,16 @@
     class="rounded-sm mx-1 my-2 px-2 py-1 hover:text-black cursor-pointer text-secondary dark:hover:text-white"
     @click="darkMode()"
   >
-    <SvgIcon
-      :path="darkOn ? mdiWeatherSunny : mdiMoonWaningCrescent"
-      :size="25"
-    />
+    <v-icon
+      :name="darkOn ? 'ri-sun-foggy-fill' : 'ri-moon-foggy-fill'"
+      scale="1.5"
+    ></v-icon>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from "vue"
-import SvgIcon from "./SvgIcon.vue"
-import { mdiMoonWaningCrescent, mdiWeatherSunny } from "@mdi/js"
-const darkOn = ref(false)
+const darkOn = ref<boolean>(false)
 const darkMode = () => {
   darkOn.value = !darkOn.value
 

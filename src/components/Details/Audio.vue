@@ -1,44 +1,49 @@
 <template>
   <div class="tooltip" data-tip="Putar Ayat">
-    <audio ref="audioRef" :id="props.index" :src="props.audio"></audio>
+    <audio
+      ref="audioRef"
+      :id="props.index.toString()"
+      :src="props.audio"
+    ></audio>
     <button @click="audioToggle(props.index)">
-      <SvgIcon
-        :path="
+      <v-icon
+        :name="
           currentAudio === props.index && isPlaying
-            ? mdiPauseCircle
-            : mdiPlayCircle
+            ? 'bi-pause-circle-fill'
+            : 'bi-play-circle-fill'
         "
-        class="text-xl mt-1"
-      />
+        scale="1.2"
+      ></v-icon>
     </button>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, ref, watch } from "vue"
-import SvgIcon from "../SvgIcon.vue"
-import { mdiPlayCircle, mdiPauseCircle } from "@mdi/js"
 
-const props = defineProps(["audio", "index"])
+const props = defineProps<{
+  audio: string
+  index: number
+}>()
 
-const audioRef = ref(null)
+const audioRef = ref<HTMLAudioElement | null>(null)
 
-const isPlaying = ref(false)
-const currentAudio = ref()
+const isPlaying = ref<boolean>(false)
+const currentAudio = ref<number>()
 
-const audioToggle = (index) => {
+const audioToggle = (index: number) => {
   const audio = audioRef.value
   isPlaying.value = !isPlaying.value
 
   if (currentAudio.value == index && isPlaying.value) {
-    audio.play()
+    audio!.play()
     isPlaying.value = true
     setTimeout(() => {
       isPlaying.value = false
-    }, audio.duration * 1050)
+    }, audio!.duration * 1050)
   } else {
     currentAudio.value = index
-    audio.pause()
+    audio!.pause()
     isPlaying.value = false
   }
 }
@@ -48,4 +53,4 @@ watch(currentAudio, () => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

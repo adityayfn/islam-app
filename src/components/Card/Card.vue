@@ -1,5 +1,5 @@
 <template>
-  <div class="group mb-2" @click="detailSurah(props.surah.number)">
+  <div class="group mb-2" @click="detailSurah(props.surah.number.toString())">
     <div
       class="card w-[22.5rem] md:w-64 xl:h-56 border-2 dark:border-slate-600 group-hover:border-secondary cursor-pointer"
     >
@@ -25,17 +25,19 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps } from "vue"
 import { useRouter } from "vue-router"
+import { SurahsType } from "../../types/"
 
-const props = defineProps(["surah"])
+const props = defineProps<{
+  surah: SurahsType
+}>()
 
 const router = useRouter()
 
-const detailSurah = (id) => {
+const detailSurah = (id: string) => {
   router.push(`/alquran/${id}`)
-  console.log(id)
 }
 </script>
 

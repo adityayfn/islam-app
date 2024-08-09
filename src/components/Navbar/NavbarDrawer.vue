@@ -4,7 +4,7 @@
     <div class="drawer-content w-10 text-secondary">
       <!-- Page content here -->
       <label for="my-drawer">
-        <SvgIcon :path="mdiMenuOpen" size="50" class="cursor-pointer" />
+        <v-icon class="cursor-pointer" name="md-menuopen" scale="2.1"></v-icon>
       </label>
     </div>
     <div class="drawer-side z-10">
@@ -19,7 +19,11 @@
         <div class="flex justify-between items-center mt-2 text-secondary">
           <AppTitle />
           <label for="my-drawer">
-            <SvgIcon :path="mdiMenuClose" size="50" class="cursor-pointer" />
+            <v-icon
+              class="cursor-pointer"
+              name="ri-menu-unfold-line"
+              scale="2.1"
+            ></v-icon>
           </label>
         </div>
         <hr class="border-b dark:border-base-300 mb-5" />
@@ -30,11 +34,9 @@
   </div>
 </template>
 
-<script setup>
-import SvgIcon from "../SvgIcon.vue"
+<script setup lang="ts">
 import NavbarItem from "./NavbarItem.vue"
 import AppTitle from "./AppTitle.vue"
-import { mdiMenuOpen, mdiMenuClose } from "@mdi/js"
 
 const navbarItemClass = "flex flex-col gap-4"
 </script>

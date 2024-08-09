@@ -19,7 +19,7 @@
   </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import NavbarDrawer from "./NavbarDrawer.vue"
 import NavbarItem from "./NavbarItem.vue"
 import DarkMode from "../Darkmode.vue"

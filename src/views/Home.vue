@@ -35,7 +35,7 @@
       </div>
       <div v-else class="flex gap-4 flex-wrap overflow-x-hidden justify-center">
         <Card
-          v-for="(surah, index) in filteredSurahs"
+          v-for="(surah, index) in (filteredSurahs as SurahsType[])"
           :surah="surah"
           :index="index"
         />
@@ -44,9 +44,10 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from "vue"
 import CardSkeleton from "../components/Card/CardSkeleton.vue"
+import { SurahsType } from "../types"
 
 import Card from "../components/Card/Card.vue"
 
@@ -60,10 +61,10 @@ const { data, isLoading } = useQuery({
     }),
 })
 
-const search = ref("")
+const search = ref<string>("")
 
 const filteredSurahs = computed(() => {
-  return data?.value?.data.filter((surah) =>
+  return data?.value?.data.filter((surah: SurahsType) =>
     surah.name.transliteration.id.toLowerCase().includes(search.value)
   )
 })

@@ -12,10 +12,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps } from "vue"
+import { HaditsContentType } from "../../types/"
 
-const props = defineProps(["item"])
+const props = defineProps<{
+  item: HaditsContentType
+}>()
 </script>
 
 <style lang="scss" scoped></style>

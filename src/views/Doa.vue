@@ -4,11 +4,13 @@
       class="h-72 md:h-80 w-full bg-gradient-to-t from-secondary to-green-500 flex flex-col justify-center items-center gap-5 mx-auto"
     >
       <div class="flex flex-col justify-center items-center gap-5 h-72">
-        <SvgIcon
-          :path="mdiStarCrescent"
-          :size="80"
-          class="text-white dark:text-black"
-        />
+        <div class="dark:hidden">
+          <v-icon name="fa-star-and-crescent" scale="5" fill="white"></v-icon>
+        </div>
+        <div class="hidden dark:inline">
+          <v-icon name="fa-star-and-crescent" scale="5" fill="black"></v-icon>
+        </div>
+
         <input
           type="search"
           placeholder="Cari Doa"
@@ -17,10 +19,12 @@
         />
       </div>
     </div>
-    <div class="flex flex-col gap-4 my-5 mx-auto md:w-[750px] xl:w-[1100px]">
+    <div
+      class="flex flex-col gap-4 my-5 md:w-[750px] xl:w-[1100px] mx-4 md:mx-auto"
+    >
       <div
         class="collapse border-2 hover:border-secondary"
-        v-for="(doa, index) in prayerList"
+        v-for="(doa , index) in (prayerList as DoaType[])"
       >
         <input type="checkbox" />
         <div class="collapse-title dark:text-base-200">
@@ -53,17 +57,17 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from "vue"
 import listDoa from "../utils/doa-harian.json"
-import SvgIcon from "../components/SvgIcon.vue"
-import { mdiStarCrescent } from "@mdi/js"
 
-const data = ref(listDoa)
-const displayedData = ref([])
-const itemsPerPage = ref(20)
-const currentIndex = ref(0)
-const search = ref("")
+import { DoaType } from "../types/"
+
+const data = ref<DoaType[]>(listDoa)
+const displayedData = ref<DoaType[]>([])
+const itemsPerPage = ref<number>(20)
+const currentIndex = ref<number>(0)
+const search = ref<string>("")
 
 onMounted(() => {
   displayedData.value = listDoa.slice(
@@ -96,4 +100,4 @@ const prayerList = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

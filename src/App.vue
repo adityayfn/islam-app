@@ -8,7 +8,7 @@
   </footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Navbar from "./components/Navbar/Index.vue"
 import ScrollTop from "./components/ScrollTop.vue"
 import { onMounted } from "vue"

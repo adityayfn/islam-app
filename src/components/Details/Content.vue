@@ -19,7 +19,7 @@
         class="content-1 number flex gap-2 bg-[#E7F4F2] dark:bg-[#2D3638] p-2 justify-between"
       >
         <div class="flex items-center gap-3">
-          <h1 class="text-2xl font-bold">{{ props.ayahs.number.inSurah }}</h1>
+          <h1 class="text-2xl font-bold">{{ props.ayahs.number?.inSurah }}</h1>
 
           <Audio :audio="props.ayahs.audio.primary" :index="props.index" />
         </div>
@@ -38,20 +38,24 @@
       </div>
     </div>
     <div v-else>
-      <h1 class="mt-5">{{ props.ayahs.tafsir.id.short }}</h1>
+      <h1 class="mt-5">{{ props.ayahs.tafsir?.id.short }}</h1>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, ref } from "vue"
+import { VersesType } from "../../types/"
 
 import Audio from "./Audio.vue"
 
-const props = defineProps(["ayahs", "index"])
+const props = defineProps<{
+  ayahs: VersesType
+  index: number
+}>()
 
-const surah = ref(true)
-const tafsir = ref(false)
+const surah = ref<boolean>(true)
+const tafsir = ref<boolean>(false)
 </script>
 
 <style lang="scss" scoped></style>

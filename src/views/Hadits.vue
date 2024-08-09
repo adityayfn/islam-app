@@ -4,11 +4,13 @@
       class="h-72 md:h-80 w-full bg-gradient-to-t from-secondary to-green-500 flex flex-col justify-center items-center gap-5 mx-auto"
     >
       <div class="flex flex-col justify-center items-center gap-5 h-auto pt-2">
-        <SvgIcon
-          :path="mdiBookOpenPageVariant"
-          :size="80"
-          class="text-white dark:text-black"
-        />
+        <div class="dark:hidden">
+          <v-icon class="" name="md-menubook" scale="5" fill="white"></v-icon>
+        </div>
+        <div class="hidden dark:inline">
+          <v-icon class="" name="md-menubook" scale="5" fill="black"></v-icon>
+        </div>
+
         <input
           type="search"
           placeholder="Cari Nomor Hadits"
@@ -18,7 +20,7 @@
         <div class="tab">
           <h1
             class="tab"
-            v-for="hadits in HaditsList"
+            v-for="hadits in (HaditsList as HaditsListType[])"
             :key="hadits.slug"
             :class="
               selectedHadits === hadits.slug
@@ -52,7 +54,10 @@
         menurut <span class="font-bold"> {{ data?.name }}</span>
       </h1>
 
-      <Content v-for="item in data?.items" :item="item" />
+      <Content
+        v-for="item in (data?.items as HaditsType[] | HaditsContentType)"
+        :item="item"
+      />
 
       <div class="join flex justify-center">
         <button
@@ -73,25 +78,25 @@
   </section>
 </template>
 
-<script setup>
-import { reactive, ref, watch, onMounted } from "vue"
+<script setup lang="ts">
+import { ref, watch, onMounted } from "vue"
 import SearchResult from "../components/Hadits/SearchResult.vue"
 import ContentSkeleton from "../components/Hadits/ContentSkeleton.vue"
 import Content from "../components/Hadits/Content.vue"
-import SvgIcon from "../components/SvgIcon.vue"
-import { mdiBookOpenPageVariant } from "@mdi/js"
 import { useQuery } from "@tanstack/vue-query"
+import { HaditsList } from "../constant/"
+import { HaditsType, HaditsListType, HaditsContentType } from "../types/"
 
-const selectedHadits = ref("abu-dawud")
-const loading = ref(true)
-const page = ref(1)
-const search = ref("")
-const searchResults = ref([])
+const selectedHadits = ref<string>("abu-dawud")
+const loading = ref<boolean>(true)
+const page = ref<number>(1)
+const search = ref<string>("")
+const searchResults = ref<HaditsType[]>([])
 const debounceSearch = ref()
-const isError = ref(false)
-const errorMessage = ref("")
+const isError = ref<boolean>(false)
+const errorMessage = ref<string>("")
 
-const changeSelectedHadits = (value) => {
+const changeSelectedHadits = (value: string) => {
   selectedHadits.value = value
 }
 
@@ -102,6 +107,7 @@ const { data, refetch } = useQuery({
       `https://hadis-api-id.vercel.app/hadith/${selectedHadits.value}?page=${page.value}`
     ).then((res) => res.json()),
 })
+console.log(data.value)
 
 const getHaditsNumber = async () => {
   const res = await fetch(
@@ -150,7 +156,7 @@ watch(search, () => {
   debounceSearch.value = setTimeout(() => {
     getHaditsNumber()
     loading.value = false
-  }, 1500)
+  }, 1200)
 })
 
 onMounted(() => {
@@ -158,45 +164,6 @@ onMounted(() => {
     loading.value = false
   }, 500)
 })
-
-const HaditsList = reactive([
-  {
-    name: "Abu Dawud",
-    slug: "abu-dawud",
-  },
-  {
-    name: "Ahmad",
-    slug: "ahmad",
-  },
-  {
-    name: "Bukhari",
-    slug: "bukhari",
-  },
-  {
-    name: "Darimi",
-    slug: "darimi",
-  },
-  {
-    name: "Ibnu Majah",
-    slug: "ibnu-majah",
-  },
-  {
-    name: "Malik",
-    slug: "malik",
-  },
-  {
-    name: "Muslim",
-    slug: "muslim",
-  },
-  {
-    name: "Nasai",
-    slug: "nasai",
-  },
-  {
-    name: "Tirmidzi",
-    slug: "tirmidzi",
-  },
-])
 </script>
 
 <style lang="scss" scoped></style>
