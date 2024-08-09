@@ -36,7 +36,7 @@
     </div>
 
     <div v-if="loading" class="flex flex-col gap-5 mt-6">
-      <ContentSkeleton v-for="cs in 20" />
+      <ContentSkeleton v-for="cs in 20" :key="cs" />
     </div>
 
     <div v-else-if="search !== ''">

@@ -31,7 +31,7 @@
         v-if="isLoading"
         class="flex gap-4 flex-wrap overflow-x-hidden justify-center"
       >
-        <CardSkeleton v-for="skeleton in 114" />
+        <CardSkeleton v-for="skeleton in 114" :key="skeleton" />
       </div>
       <div v-else class="flex gap-4 flex-wrap overflow-x-hidden justify-center">
         <Card

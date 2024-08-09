@@ -19,7 +19,12 @@
 <script setup lang="ts">
 import { defineProps } from "vue"
 
-const props = defineProps(["path", "titleModal", "content", "href", "id"])
+const props = defineProps<{
+  titleModal: string
+  content: string
+  href: string
+  id: string
+}>()
 </script>
 
 <style></style>

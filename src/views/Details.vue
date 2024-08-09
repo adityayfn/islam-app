@@ -13,7 +13,6 @@
         </h1>
 
         <Modal
-          :path="mdiInformationSlabCircle"
           href="#my_modal_1"
           id="my_modal_1"
           title-modal="Detail Surah"
@@ -36,7 +35,6 @@ import { useQuery } from "@tanstack/vue-query"
 import Content from "../components/Details/Content.vue"
 import { useRoute } from "vue-router"
 import Modal from "../components/Modal.vue"
-import { mdiInformationSlabCircle } from "@mdi/js"
 import { ref, onMounted } from "vue"
 
 const loading = ref<boolean>(true)
